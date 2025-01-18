@@ -11,9 +11,6 @@ Out of the box you get
 * github ci/cd workflows
 * Makefile
 
-With every push into the repo the document is compiled
-and published on a draft branch.
-
 ## Development Commands
 
 ```bash
