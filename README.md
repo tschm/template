@@ -1,4 +1,4 @@
-# Template - cradle template
+# Template for cradle
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 [![CI](https://github.com/tschm/paper/actions/workflows/act.yml/badge.svg)](https://github.com/tschm/paper/actions/workflows/act.yml)
