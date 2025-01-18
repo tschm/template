@@ -36,9 +36,3 @@ jobs:
         with:
           working-directory: template
           workflow: pre-commit.yml
-
-      - name: Test latex flow
-        uses: cvxgrp/cradle/actions/flow@main
-        with:
-          working-directory: template
-          workflow: latex.yml

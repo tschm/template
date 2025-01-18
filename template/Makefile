@@ -11,21 +11,9 @@ help:  ## Display this help screen
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}' | sort
 
 
-# list the papers here
-.PHONY: compile
-compile: ## Compile document(s)
-	@./tectonic paper/{{ project_name }}.tex
-
-
 .PHONY: clean
 clean: ## clean the folder
 	@git clean -d -X -f
-
-
-.PHONY: install
-install: ## install tectonic
-	@curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
-	@echo $PATH
 
 
 .PHONY: fmt

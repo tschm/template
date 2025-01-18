@@ -1,4 +1,4 @@
-# paper - cradle template
+# Template - cradle template
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 [![CI](https://github.com/tschm/paper/actions/workflows/act.yml/badge.svg)](https://github.com/tschm/paper/actions/workflows/act.yml)
@@ -10,7 +10,6 @@ Out of the box you get
 * curated pre-commit-hooks (e.g. for spelling)
 * github ci/cd workflows
 * Makefile
-* Example *.tex and bib file.
 
 With every push into the repo the document is compiled
 and published on a draft branch.
