@@ -16,4 +16,4 @@ repos:
     rev: v1.29.5
     hooks:
       - id: typos
-        exclude: '\.gitignore$'
+        exclude: \.gitignore|\.copier.answers$
