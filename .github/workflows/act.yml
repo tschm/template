@@ -12,16 +12,6 @@ jobs:
         with:
             python-version: '3.12'
 
-      - name: Prepare the repo
-        working-directory: template
-        shell: bash
-        run: |
-          # otherwise the pre-commit hooks won't "see" files
-          # also act needs to have the commit in place
-          git init -b main
-          git add .
-          git commit -m "Initial commit"
-
       - name: Test pre-commit flow
         uses: tschm/cradle/actions/flow@main
         with:
