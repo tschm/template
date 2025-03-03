@@ -15,5 +15,4 @@ jobs:
       - name: Test pre-commit flow
         uses: tschm/cradle/actions/flow@main
         with:
-          working-directory: template
           workflow: pre-commit.yml
