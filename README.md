@@ -1,4 +1,4 @@
-# Template for cradle
+# 🧩 Template for cradle
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI](https://github.com/tschm/paper/actions/workflows/act.yml/badge.svg)](https://github.com/tschm/paper/actions/workflows/act.yml)
@@ -7,26 +7,26 @@
 The template supports the fast creation of repositories of LaTeX documents.
 Out of the box you get
 
-* curated pre-commit-hooks (e.g. for spelling)
-* github ci/cd workflows
-* Makefile
+* ✅ Curated pre-commit-hooks (e.g. for spelling)
+* 🔄 GitHub CI/CD workflows
+* 🛠️ Makefile
 
-## Development Commands
+## 🛠️ Development Commands
 
 ```bash
 make fmt     # Install pre-commit hooks and run them on all files
 ```
 
-## Contributing
+## 👥 Contributing
 
-* Fork the repository
-* Create your feature branch (git checkout -b feature/amazing-feature)
-* Commit your changes (git commit -m 'Add some amazing feature')
-* Push to the branch (git push origin feature/amazing-feature)
-* Open a Pull Request
+* 🍴 Fork the repository
+* 🌿 Create your feature branch (git checkout -b feature/amazing-feature)
+* 💾 Commit your changes (git commit -m 'Add some amazing feature')
+* 🚢 Push to the branch (git push origin feature/amazing-feature)
+* 🔍 Open a Pull Request
 
-## Contact
+## 📬 Contact
 
 Thomas Schmelzer - [@tschm](https://github.com/tschm)
 
-Project Link: <https://github.com/tschm/package>
+🔗 Project Link: <https://github.com/tschm/package>
