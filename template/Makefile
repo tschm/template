@@ -31,5 +31,4 @@ clean: ## clean the folder
 # Mark 'fmt' as a phony target
 .PHONY: fmt
 fmt: venv ## Run autoformatting and linting
-	@uvx run pre-commit install  # Install pre-commit hooks in the git repository
-	@uvx run pre-commit run --all-files  # Run all pre-commit hooks on all files
+	@uvx pre-commit run --all-files  # Run all pre-commit hooks on all files
