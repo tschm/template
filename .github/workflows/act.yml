@@ -12,9 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Launch the cradle
-        uses: tschm/cradle/actions/cradle@v0.1.73  # Custom action to set up the environment
+        # Custom action to set up the environment
+        uses: tschm/cradle/actions/cradle@v0.1.73
         with:
             python-version: '3.12'  # Specify Python version to use
+
+      - name: Verify git installation
+        shell: bash
+        run: |
+          git --version
 
       - name: Test pre-commit flow
         uses: tschm/cradle/actions/flow@v0.1.73  # Custom action to run workflow tests
