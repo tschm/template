@@ -33,4 +33,4 @@ jobs:
       - name: Output
         shell: bash
         run: |
-          cat /root/.cache/pre-commit/pre-commit.log
+          sudo cat /root/.cache/pre-commit/pre-commit.log
