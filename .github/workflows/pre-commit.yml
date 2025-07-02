@@ -28,6 +28,24 @@ jobs:
         run: |
           git --version
 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize git repository (for act)
+        if: ${{ env.ACT == 'true' }}
+        shell: bash
+        run: |
+          # Ensure we're in a git repository
+          git config --global user.email "test@example.com"
+          git config --global user.name "Test User"
+
+          # If not already in a git repository, initialize one
+          if [ ! -d .git ]; then
+            git init
+            git add .
+            git commit -m "Initial commit for pre-commit checks"
+          fi
+
       - uses: tschm/cradle/actions/pre-commit@v0.1.73  # Custom action to run pre-commit checks
 
       - name: Output
