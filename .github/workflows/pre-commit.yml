@@ -21,3 +21,8 @@ jobs:
           git --version
 
       - uses: tschm/cradle/actions/pre-commit@v0.1.73  # Custom action to run pre-commit checks
+
+      - name: Output
+        shell: bash
+        run: |
+          cat /root/.cache/pre-commit/pre-commit.log
