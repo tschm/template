@@ -11,6 +11,9 @@ jobs:
   test-template-workflows:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Launch the cradle
         # Custom action to set up the environment
         uses: tschm/cradle/actions/cradle@v0.1.73
