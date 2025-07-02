@@ -28,10 +28,12 @@ jobs:
         run: |
           git --version
 
+      # Checkout the repository ourselves
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Initialize git repository (for act)
+      # Initialize git repository before running pre-commit
+      - name: Initialize git repository for pre-commit (for act)
         if: ${{ env.ACT == 'true' }}
         shell: bash
         run: |
@@ -46,9 +48,19 @@ jobs:
             git commit -m "Initial commit for pre-commit checks"
           fi
 
-      - uses: tschm/cradle/actions/pre-commit@v0.1.73  # Custom action to run pre-commit checks
+          # Debug information
+          echo "Current directory: $(pwd)"
+          echo "Git status:"
+          git status
 
-      - name: Output
-        shell: bash
-        run: |
-          sudo cat /root/.cache/pre-commit/pre-commit.log
+      # Install Node 20 (as done in the pre-commit action)
+      - name: Install Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Run pre-commit directly instead of using the custom action
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: '--verbose --all-files'
