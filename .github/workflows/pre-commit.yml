@@ -32,3 +32,4 @@ jobs:
         uses: tschm/cradle/actions/flow@v0.2.0  # Custom action to run workflow tests
         with:
           workflow: pre-commit.yml  # Test the pre-commit workflow
+
