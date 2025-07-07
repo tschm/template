@@ -40,4 +40,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}  # Token for authentication
           tag_name: ${{ inputs.tag }}  # Use the provided tag
           generate_release_notes: true  # Automatically generate notes from commits
-          files: *  # Attach all files in the dist directory
