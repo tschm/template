@@ -1,10 +1,14 @@
 # Workflow to automatically bump the version and create a new tag
 # This workflow is manually triggered via the GitHub UI
 
-name: Bump version and publish
-
+name: Bump version
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:  # Manual trigger only
+    inputs:
+      tag:
+        description: 'Release tag (e.g. v1.2.3)'
+        required: true
+        type: string
 
 # Permissions needed for the workflow
 permissions:
@@ -15,11 +19,15 @@ jobs:
   tagging:
     runs-on: ubuntu-latest
     outputs:
-      new_tag: ${{ steps.tag_step.outputs.new_tag }}  # Output the new tag to be used by other jobs
+      new_tag: ${{ steps.set_tag.outputs.tag }}  # Output the tag to be used by other jobs
 
     steps:
-      - name: Generate Tag
-        id: tag_step
-        uses: tschm/cradle/actions/tag@v0.1.81  # Custom action to generate a new tag
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+      - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
+        uses: actions/checkout@v4  # Check out the repository code
+
+      - name: Create and Push Tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag -a ${{ github.event.inputs.tag }} -m "Release ${{ github.event.inputs.tag }}"
+          git push origin ${{ github.event.inputs.tag }}
