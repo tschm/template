@@ -15,52 +15,20 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Install git
-        shell: bash
-        if: ${{ env.ACT == 'true' }}
-        run: |
-          echo "🛠 Installing git (running under act)..."
-          apt-get update && apt-get install -y git
+      - uses: tschm/cradle/actions/pre-commit@v0.2.0  # Custom action to run pre-commit checks
 
 
-      - name: Verify git installation
-        shell: bash
-        run: |
-          git --version
+  # Job to test pre-commit checks on the template
+  pre-commit-template:
+    runs-on: ubuntu-latest
 
-      # Checkout the repository ourselves
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Initialize git repository before running pre-commit
-      - name: Initialize git repository for pre-commit (for act)
-        if: ${{ env.ACT == 'true' }}
-        shell: bash
-        run: |
-          # Ensure we're in a git repository
-          git config --global user.email "test@example.com"
-          git config --global user.name "Test User"
-
-          # If not already in a git repository, initialize one
-          if [ ! -d .git ]; then
-            git init
-            git add .
-            git commit -m "Initial commit for pre-commit checks"
-          fi
-
-          # Debug information
-          echo "Current directory: $(pwd)"
-          echo "Git status:"
-          git status
-
-      # Install Node 20 (as done in the pre-commit action)
-      - name: Install Node 20
-        uses: actions/setup-node@v4
+    steps:
+      - name: Launch the cradle
+        uses: tschm/cradle/actions/cradle@v0.2.0  # Custom action to set up the environment
         with:
-          node-version: '22'
+          python-version: '3.12'  # Specify Python version to use
 
-      # Run pre-commit directly instead of using the custom action
-      - name: Run pre-commit
-        uses: pre-commit/action@v3.0.1
+      - name: Test pre-commit flow
+        uses: tschm/cradle/actions/flow@v0.2.0  # Custom action to run workflow tests
         with:
-          extra_args: '--verbose --all-files'
+          workflow: pre-commit.yml  # Test the pre-commit workflow
