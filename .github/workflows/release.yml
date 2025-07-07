@@ -1,10 +1,14 @@
 # Workflow to automatically bump the version and create a new tag
 # This workflow is manually triggered via the GitHub UI
 
-name: Bump Version
-
+name: Bump version
 on:
-  workflow_dispatch  # Manual trigger
+  workflow_dispatch:  # Manual trigger only
+    inputs:
+      tag:
+        description: 'Release tag (e.g. v1.2.3)'
+        required: true
+        type: string
 
 # Permissions needed for the workflow
 permissions:
@@ -12,11 +16,24 @@ permissions:
 
 jobs:
   # Job to generate a new version tag
-  build:
+  tagging:
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.set_tag.outputs.tag }}  # Output the tag to be used by other jobs
 
     steps:
-      - name: Generate Tag
-        uses: tschm/cradle/actions/tag@v0.2.0  # Custom action to generate a new tag
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+      - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
+        uses: actions/checkout@v4  # Check out the repository code
+
+      - name: Set Tag from Input
+        id: set_tag
+        run: |
+          echo "tag={% raw %}${{ github.event.inputs.tag }}{% endraw %}" >> $GITHUB_OUTPUT
+          echo "Using tag: {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
+
+      - name: Create and Push Tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag -a {% raw %}${{ github.event.inputs.tag }}{% endraw %} -m "Release {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
+          git push origin {% raw %}${{ github.event.inputs.tag }}{% endraw %}
